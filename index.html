@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kobuk Image Caption Support</title>
+  <link rel="stylesheet" href="https://use.typekit.net/lfw2vyo.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:            #092234;
+      --brand-secondary: #e5ccad;
+      --brand-warm:      #f0e2d0;
+      --white:           #ffffff;
+    }
+
+    body {
+      font-family: din-2014, sans-serif;
+      background: #e8e8e8;
+      color: #111;
+    }
+
+    /* ── Demo shell ─────────────────────────────────────── */
+    .demo-header {
+      background: #111;
+      padding: 18px 40px;
+      border-bottom: 1px solid #333;
+    }
+    .demo-header h1 {
+      font-family: ff-good-web-pro-condensed, sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .component-block {
+      margin: 48px 0;
+    }
+    .component-label {
+      padding: 10px 40px;
+      background: #d0d0d0;
+      font-family: system-ui, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #555;
+      border-top: 1px solid #bbb;
+      border-bottom: 1px solid #bbb;
+    }
+
+    /* ── Hero banner ────────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      display: block;
+      width: 100%;
+      height: 700px;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    /* Gradient overlays (faithful to Figma) */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(0deg,   rgba(9,34,52,0) 60%, rgba(9,34,52,1) 100%),
+        linear-gradient(243deg, rgba(9,34,52,0) 41%, rgba(9,34,52,0.85) 68%),
+        linear-gradient(90deg,  rgba(9,34,52,0.2) 0%, rgba(9,34,52,0.2) 100%);
+      pointer-events: none;
+    }
+
+    /* ── Navigation ─────────────────────────────────────── */
+    .hero-nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 28px 64px;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1600px;
+    }
+
+    .nav-side {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    .nav-side.right {
+      justify-content: flex-end;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 0;
+      border-left: 1px dashed rgba(255,255,255,0.35);
+      border-right: 1px dashed rgba(255,255,255,0.35);
+      margin-right: -1px;
+    }
+    .nav-item a {
+      font-family: ff-good-web-pro-condensed, sans-serif;
+      font-weight: 700;
+      font-size: 21px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 4px 0;
+    }
+    .nav-item.active a {
+      color: var(--brand-warm);
+      padding-bottom: 3px;
+      border-bottom: 1px solid var(--brand-secondary);
+    }
+    .nav-dropdown-arrow {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    /* Logo */
+    .nav-logo {
+      flex-shrink: 0;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-img {
+      height: 72px;
+      width: auto;
+      display: block;
+    }
+
+    /* CTA button */
+    .nav-cta {
+      margin-left: 20px;
+      flex-shrink: 0;
+    }
+    .nav-cta a {
+      display: inline-flex;
+      align-items: center;
+      padding: 13px 22px;
+      border: 1px solid var(--white);
+      font-family: ff-good-web-pro-condensed, sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-cta a:hover {
+      color: #D3A873;
+      border-color: #D3A873;
+    }
+
+    /* ── Hero text content ───────────────────────────────── */
+    .hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 64px 72px;
+      display: flex;
+    }
+    .hero-content-inner {
+      max-width: 820px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero-eyebrow {
+      font-family: brothers, sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--brand-secondary);
+    }
+    .hero-headline {
+      font-family: ff-good-web-pro-condensed, sans-serif;
+      font-weight: 900;
+      font-size: 64px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-top: -4px;
+    }
+    .hero-body p {
+      font-family: din-2014, sans-serif;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.92);
+    }
+    .hero-body p + p { margin-top: 14px; }
+
+    /* ── Camera caption tooltip ──────────────────────────── */
+    .caption-trigger {
+      position: absolute;
+      bottom: 32px;
+      right: 64px;
+      z-index: 20;
+    }
+
+    /* Popup card (hidden by default) */
+    .caption-card {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      right: 0;
+      width: 300px;
+      background: rgba(10, 10, 10, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 18px 20px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+    }
+    .caption-trigger:hover .caption-card {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .caption-card-title {
+      font-family: ff-good-web-pro-condensed, sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+    .caption-card-desc {
+      font-family: din-2014, sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.72);
+    }
+    .caption-card-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      margin: 12px 0;
+    }
+    .caption-card-coords {
+      font-family: din-2014, sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--brand-secondary);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Image with Text ────────────────────────────────── */
+    .image-text-wrapper {
+      background: var(--navy);
+      padding: 64px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .image-text-inner {
+      width: 1312px;
+      max-width: 100%;
+    }
+
+    .image-text {
+      display: flex;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .image-text + .image-text {
+      margin-top: 80px;
+      padding-top: 80px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .image-text--reverse {
+      flex-direction: row-reverse;
+    }
+
+    .image-text-content {
+      flex: 1 0 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .image-text-headline {
+      font-family: ff-good-web-pro-condensed, sans-serif;
+      font-weight: 900;
+      font-size: 40px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .image-text-lead {
+      font-family: din-2014, sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.4;
+      color: var(--brand-secondary);
+    }
+
+    .image-text-body {
+      font-family: din-2014, sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.4;
+      color: var(--white);
+    }
+
+    .image-text-media {
+      flex-shrink: 0;
+      width: 624px;
+    }
+
+    .image-text-frame {
+      position: relative;
+      width: 100%;
+      height: 394px;
+      border: 1px solid #add2e2;
+      box-shadow: 0px 20px 24px -4px rgba(16,24,40,0.08), 0px 8px 8px -4px rgba(16,24,40,0.03);
+      overflow: hidden;
+    }
+
+    .image-text-frame img.frame-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Tooltip positioned inside the image frame */
+    .caption-trigger--img {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      z-index: 10;
+    }
+
+    /* Smaller pill variant for image-frame tooltips */
+    .caption-pill--sm {
+      width: auto;
+      padding: 4px 8px;
+      gap: 8px;
+    }
+
+    .caption-pill--sm .caption-pill-icon {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+    }
+
+    /* Caption card — left-anchored variant (for bottom-left triggers) */
+    .caption-card--left {
+      right: auto;
+      left: 0;
+    }
+
+    /* ── 50/50 Feature ──────────────────────────────────── */
+    .feature-5050 {
+      position: relative;
+      width: 100%;
+      max-width: 1312px;
+      margin: 0 auto;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 0;
+      min-height: 480px;
+    }
+
+    .feature-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    /* Gradient: transparent left → navy 80% right */
+    .feature-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(9,34,52,0) 0%, rgba(9,34,52,0.8) 55%);
+      pointer-events: none;
+    }
+
+    .feature-container {
+      position: relative;
+      width: 100%;
+      max-width: 1312px;
+      padding: 0 80px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .feature-content {
+      flex: 1 0 0;
+      max-width: 596px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-eyebrow-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-eyebrow {
+      font-family: brothers, sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.5;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--brand-secondary);
+    }
+
+    .feature-headline {
+      font-family: ff-good-web-pro-condensed, sans-serif;
+      font-weight: 900;
+      font-size: 48px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .feature-body {
+      font-family: din-2014, sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.92);
+    }
+
+    /* Caption trigger — bottom-left variant */
+    .caption-trigger--left {
+      position: absolute;
+      bottom: 23px;
+      left: 23px;
+      right: auto;
+      z-index: 20;
+    }
+
+    /* Pill button (always visible) */
+    .caption-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      width: 180px;
+      background: rgba(10, 10, 10, 0.6);
+      border: 1px solid rgba(255,255,255,0.65);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      appearance: none;
+    }
+    .caption-trigger:hover .caption-pill {
+      background: rgba(10, 10, 10, 0.8);
+      border-color: #D3A873;
+    }
+    .caption-trigger:hover .caption-pill-text {
+      color: #D3A873;
+    }
+    .caption-trigger:hover .caption-pill-icon {
+      color: #D3A873;
+    }
+
+    .caption-pill-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: block;
+      color: #e3e3e3;
+      transition: color 0.2s;
+    }
+    .caption-pill-text {
+      font-family: din-2014, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo shell header -->
+  <header class="demo-header">
+    <h1>Kobuk Image Caption Support</h1>
+  </header>
+
+  <!-- ── Hero Banner ───────────────────────────────────────── -->
+  <div class="component-block">
+    <div class="component-label">Hero Banner</div>
+
+    <div class="hero">
+
+      <!-- Background image -->
+      <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
+      <div class="hero-overlay"></div>
+
+      <!-- Navigation -->
+      <nav class="hero-nav" aria-label="Site navigation">
+        <div class="hero-nav-inner">
+          <div class="nav-side left">
+            <div class="nav-item active"><a href="#">About</a></div>
+            <div class="nav-item"><a href="#">Products</a></div>
+            <div class="nav-item"><a href="#">News</a></div>
+          </div>
+          <a href="#" class="nav-logo">
+            <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
+          </a>
+          <div class="nav-side right">
+            <div class="nav-item">
+              <a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
+            </div>
+            <div class="nav-item">
+              <a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
+            </div>
+            <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Text content -->
+      <div class="hero-content">
+        <div class="hero-content-inner">
+          <p class="hero-eyebrow">About Kobuk Cartridges</p>
+          <h2 class="hero-headline">Where Purpose<br>Meets Performance</h2>
+          <div class="hero-body">
+            <p>Kobuk Cartridges exists because we believe in doing things the right way, with purpose, integrity, and respect for the people who depend on every round. We are here to raise the standard, not blend into it.</p>
+            <p>At Kobuk Cartridges, we push past limits because excellence matters. We solve real problems because people need solutions they can trust. And we put our customers first because reliability is our responsibility.</p>
+            <p>Kobuk Cartridges. Built with purpose. Trusted when it counts.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Photo caption tooltip ── -->
+      <div class="caption-trigger">
+
+        <!-- Popup card (visible on hover) -->
+        <div class="caption-card" role="tooltip">
+          <div class="caption-card-title">Kobuk River Valley</div>
+          <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+          <hr class="caption-card-divider">
+          <div class="caption-card-coords">67.07333° N, 154.31167° W</div>
+        </div>
+
+        <!-- Always-visible pill button -->
+        <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
+          <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
+          <span class="caption-pill-text">Where in Kobuk?</span>
+        </button>
+
+      </div>
+      <!-- ── /Photo caption tooltip ── -->
+
+    </div>
+  </div>
+
+  <!-- ── 50/50 Feature ────────────────────────────────────── -->
+  <div class="component-block">
+    <div class="component-label">50/50 Feature</div>
+
+    <div class="feature-5050">
+
+      <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
+      <div class="feature-overlay"></div>
+
+      <div class="feature-container">
+        <div class="feature-content">
+          <div class="feature-eyebrow-group">
+            <p class="feature-eyebrow">Why Choose Us</p>
+            <h2 class="feature-headline">Purpose Built. Proven Performance.</h2>
+          </div>
+          <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
+        </div>
+      </div>
+
+      <!-- ── Photo caption tooltip (bottom-left) ── -->
+      <div class="caption-trigger caption-trigger--left">
+
+        <div class="caption-card caption-card--left" role="tooltip">
+          <div class="caption-card-title">Brooks Range, Alaska</div>
+          <p class="caption-card-desc">A river valley cuts through the Brooks Range in the Gates of the Arctic National Park, one of the most remote wilderness areas in North America.</p>
+          <hr class="caption-card-divider">
+          <div class="caption-card-coords">67.83° N, 153.62° W</div>
+        </div>
+
+        <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
+          <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
+          <span class="caption-pill-text">Where in Kobuk?</span>
+        </button>
+
+      </div>
+      <!-- ── /Photo caption tooltip ── -->
+
+    </div>
+  </div>
+
+  <!-- ── Left / Right-Aligned Image with Text ─────────────── -->
+  <div class="component-block">
+    <div class="component-label">Left / Right-Aligned Image with Text</div>
+
+    <div class="image-text-wrapper">
+      <div class="image-text-inner">
+
+        <!-- Image Right -->
+        <div class="image-text">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
+            <p class="image-text-lead">There is nowhere on Earth to test one's resolve like Alaska.</p>
+            <p class="image-text-body">The Last Frontier serves as the inspiration for our identity — a salute to Alaska's landscape and inhabitants — and our admiration for both.</p>
+            <p class="image-text-body">We see Alaska as the ultimate proving ground for adventure.</p>
+            <p class="image-text-body">And no matter the challenge that lies ahead, it's our job to empower our customers to Fear No Frontier.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--left" role="tooltip">
+                  <div class="caption-card-title">Kenai Peninsula, Alaska</div>
+                  <p class="caption-card-desc">Two hunters navigate the spruce forests of the Kenai Peninsula, one of Alaska's premier backcountry destinations.</p>
+                  <hr class="caption-card-divider">
+                  <div class="caption-card-coords">60.44° N, 150.81° W</div>
+                </div>
+                <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
+                  <span class="caption-pill-text">Where in Kobuk?</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Left -->
+        <div class="image-text image-text--reverse">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Built for the Field</h2>
+            <p class="image-text-lead">Every round engineered for the conditions you'll actually face.</p>
+            <p class="image-text-body">Kobuk Cartridges are tested where temperatures drop below zero, where equipment is pushed to its limits, and where failure is not an option.</p>
+            <p class="image-text-body">From the tundra to the tree line, our ammunition delivers the consistent performance that hunters and marksmen in the most demanding environments trust.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--left" role="tooltip">
+                  <div class="caption-card-title">Kobuk River Valley</div>
+                  <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+                  <hr class="caption-card-divider">
+                  <div class="caption-card-coords">67.07333° N, 154.31167° W</div>
+                </div>
+                <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
+                  <span class="caption-pill-text">Where in Kobuk?</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
