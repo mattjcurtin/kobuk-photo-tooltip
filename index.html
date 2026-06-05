@@ -263,19 +263,6 @@
       line-height: 1.55;
       color: rgba(255,255,255,0.72);
     }
-    .caption-card-divider {
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.15);
-      margin: 12px 0;
-    }
-    .caption-card-coords {
-      font-family: din-2014, sans-serif;
-      font-weight: 400;
-      font-size: 11px;
-      color: var(--brand-secondary);
-      letter-spacing: 0.5px;
-    }
-
     /* ── Image with Text ────────────────────────────────── */
     .image-text-wrapper {
       background: var(--navy);
@@ -373,12 +360,6 @@
       width: auto;
       padding: 4px 8px;
       gap: 8px;
-    }
-
-    .caption-pill--sm .caption-pill-icon {
-      width: 24px;
-      height: 24px;
-      min-width: 24px;
     }
 
     /* Caption card — left-anchored variant (for bottom-left triggers) */
@@ -481,9 +462,8 @@
     .caption-pill {
       display: flex;
       align-items: center;
-      gap: 12px;
       padding: 12px;
-      width: 180px;
+      width: auto;
       background: rgba(10, 10, 10, 0.6);
       border: 1px solid rgba(255,255,255,0.65);
       cursor: pointer;
@@ -496,18 +476,6 @@
     }
     .caption-trigger:hover .caption-pill-text {
       color: #D3A873;
-    }
-    .caption-trigger:hover .caption-pill-icon {
-      color: #D3A873;
-    }
-
-    .caption-pill-icon {
-      flex-shrink: 0;
-      width: 28px;
-      height: 28px;
-      display: block;
-      color: #e3e3e3;
-      transition: color 0.2s;
     }
     .caption-pill-text {
       font-family: din-2014, sans-serif;
@@ -579,14 +547,11 @@
         <div class="caption-card" role="tooltip">
           <div class="caption-card-title">Kobuk River Valley</div>
           <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
-          <hr class="caption-card-divider">
-          <div class="caption-card-coords">67.07333° N, 154.31167° W</div>
         </div>
 
         <!-- Always-visible pill button -->
         <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
-          <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
-          <span class="caption-pill-text">Where in Kobuk?</span>
+          <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
         </button>
 
       </div>
@@ -595,9 +560,9 @@
     </div>
   </div>
 
-  <!-- ── Hero Banner — Coordinates Only ─────────────────── -->
+  <!-- ── Hero Banner — Title Only ─────────────────── -->
   <div class="component-block">
-    <div class="component-label">Hero Banner — Coordinates Only</div>
+    <div class="component-label">Hero Banner — Title Only</div>
 
     <div class="hero">
 
@@ -640,11 +605,10 @@
 
       <div class="caption-trigger">
         <div class="caption-card" role="tooltip">
-          <div class="caption-card-title">67.07333° N, 154.31167° W</div>
+          <div class="caption-card-title">Kobuk River Valley</div>
         </div>
         <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
-          <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
-          <span class="caption-pill-text">Where in Kobuk?</span>
+          <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
         </button>
       </div>
 
@@ -676,13 +640,10 @@
         <div class="caption-card caption-card--left" role="tooltip">
           <div class="caption-card-title">Brooks Range, Alaska</div>
           <p class="caption-card-desc">A river valley cuts through the Brooks Range in the Gates of the Arctic National Park, one of the most remote wilderness areas in North America.</p>
-          <hr class="caption-card-divider">
-          <div class="caption-card-coords">67.83° N, 153.62° W</div>
         </div>
 
         <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
-          <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
-          <span class="caption-pill-text">Where in Kobuk?</span>
+          <span class="caption-pill-text">67.83° N, 153.62° W</span>
         </button>
 
       </div>
@@ -691,9 +652,9 @@
     </div>
   </div>
 
-  <!-- ── 50/50 Feature — Coordinates Only ────────────────── -->
+  <!-- ── 50/50 Feature — Title Only ────────────────── -->
   <div class="component-block">
-    <div class="component-label">50/50 Feature — Coordinates Only</div>
+    <div class="component-label">50/50 Feature — Title Only</div>
 
     <div class="feature-5050">
 
@@ -712,11 +673,10 @@
 
       <div class="caption-trigger caption-trigger--left">
         <div class="caption-card caption-card--left" role="tooltip">
-          <div class="caption-card-title">67.83° N, 153.62° W</div>
+          <div class="caption-card-title">Brooks Range, Alaska</div>
         </div>
         <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
-          <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
-          <span class="caption-pill-text">Where in Kobuk?</span>
+          <span class="caption-pill-text">67.83° N, 153.62° W</span>
         </button>
       </div>
 
@@ -746,12 +706,9 @@
                 <div class="caption-card caption-card--left" role="tooltip">
                   <div class="caption-card-title">Kenai Peninsula, Alaska</div>
                   <p class="caption-card-desc">Two hunters navigate the spruce forests of the Kenai Peninsula, one of Alaska's premier backcountry destinations.</p>
-                  <hr class="caption-card-divider">
-                  <div class="caption-card-coords">60.44° N, 150.81° W</div>
                 </div>
                 <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
-                  <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
-                  <span class="caption-pill-text">Where in Kobuk?</span>
+                  <span class="caption-pill-text">60.44° N, 150.81° W</span>
                 </button>
               </div>
             </div>
@@ -773,12 +730,9 @@
                 <div class="caption-card caption-card--left" role="tooltip">
                   <div class="caption-card-title">Kobuk River Valley</div>
                   <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
-                  <hr class="caption-card-divider">
-                  <div class="caption-card-coords">67.07333° N, 154.31167° W</div>
                 </div>
                 <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
-                  <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
-                  <span class="caption-pill-text">Where in Kobuk?</span>
+                  <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
                 </button>
               </div>
             </div>
@@ -789,9 +743,9 @@
     </div>
   </div>
 
-  <!-- ── Left / Right-Aligned Image with Text — Coordinates Only ── -->
+  <!-- ── Left / Right-Aligned Image with Text — Title Only ── -->
   <div class="component-block">
-    <div class="component-label">Left / Right-Aligned Image with Text — Coordinates Only</div>
+    <div class="component-label">Left / Right-Aligned Image with Text — Title Only</div>
 
     <div class="image-text-wrapper">
       <div class="image-text-inner">
@@ -810,11 +764,10 @@
               <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
               <div class="caption-trigger caption-trigger--img">
                 <div class="caption-card caption-card--left" role="tooltip">
-                  <div class="caption-card-title">60.44° N, 150.81° W</div>
+                  <div class="caption-card-title">Kenai Peninsula, Alaska</div>
                 </div>
                 <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
-                  <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
-                  <span class="caption-pill-text">Where in Kobuk?</span>
+                  <span class="caption-pill-text">60.44° N, 150.81° W</span>
                 </button>
               </div>
             </div>
@@ -834,11 +787,10 @@
               <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
               <div class="caption-trigger caption-trigger--img">
                 <div class="caption-card caption-card--left" role="tooltip">
-                  <div class="caption-card-title">67.07333° N, 154.31167° W</div>
+                  <div class="caption-card-title">Kobuk River Valley</div>
                 </div>
                 <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
-                  <svg class="caption-pill-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.9999 22.8203C17.5299 22.8203 18.8269 22.2883 19.8909 21.2243C20.9549 20.1603 21.4869 18.8633 21.4869 17.3333C21.4869 15.8033 20.9549 14.5063 19.8909 13.4423C18.8269 12.3783 17.5299 11.8463 15.9999 11.8463C14.4699 11.8463 13.1729 12.3783 12.1089 13.4423C11.0449 14.5063 10.5129 15.8033 10.5129 17.3333C10.5129 18.8633 11.0449 20.1603 12.1089 21.2243C13.1729 22.2883 14.4699 22.8203 15.9999 22.8203ZM15.9999 20.8206C15.0153 20.8206 14.1879 20.4855 13.5179 19.8153C12.8477 19.1453 12.5126 18.318 12.5126 17.3333C12.5126 16.3486 12.8477 15.5213 13.5179 14.8513C14.1879 14.1811 15.0153 13.846 15.9999 13.846C16.9846 13.846 17.8119 14.1811 18.4819 14.8513C19.1521 15.5213 19.4873 16.3486 19.4873 17.3333C19.4873 18.318 19.1521 19.1453 18.4819 19.8153C17.8119 20.4855 16.9846 20.8206 15.9999 20.8206ZM3.33325 27.3333V7.33329H9.81525L12.2819 4.66663H19.7179L22.1846 7.33329H28.6666V27.3333H3.33325ZM5.33325 25.3333H26.6666V9.33329H21.2923L18.8459 6.66663H13.1539L10.7076 9.33329H5.33325V25.3333Z" fill="currentColor"/></svg>
-                  <span class="caption-pill-text">Where in Kobuk?</span>
+                  <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
                 </button>
               </div>
             </div>
