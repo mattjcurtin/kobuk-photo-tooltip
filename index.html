@@ -485,6 +485,35 @@
       transition: color 0.2s;
       white-space: nowrap;
     }
+
+    /* ── Coordinates-only (no hover state) ───────────────── */
+    .caption-coords {
+      position: absolute;
+      z-index: 20;
+      font-family: din-2014, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.85), 0 0 16px rgba(0,0,0,0.5);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .caption-coords--bottom-right {
+      bottom: 32px;
+      right: 64px;
+    }
+
+    .caption-coords--bottom-left {
+      bottom: 23px;
+      left: 23px;
+    }
+
+    .caption-coords--img {
+      bottom: 12px;
+      left: 12px;
+    }
   </style>
 </head>
 <body>
@@ -493,6 +522,54 @@
   <header class="demo-header">
     <h1>Kobuk Image Caption Support</h1>
   </header>
+
+  <!-- ── Hero Banner — Coordinates Only ────────────────── -->
+  <div class="component-block">
+    <div class="component-label">Hero Banner — Coordinates Only</div>
+
+    <div class="hero">
+
+      <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
+      <div class="hero-overlay"></div>
+
+      <nav class="hero-nav" aria-label="Site navigation">
+        <div class="hero-nav-inner">
+          <div class="nav-side left">
+            <div class="nav-item active"><a href="#">About</a></div>
+            <div class="nav-item"><a href="#">Products</a></div>
+            <div class="nav-item"><a href="#">News</a></div>
+          </div>
+          <a href="#" class="nav-logo">
+            <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
+          </a>
+          <div class="nav-side right">
+            <div class="nav-item">
+              <a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
+            </div>
+            <div class="nav-item">
+              <a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
+            </div>
+            <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-content-inner">
+          <p class="hero-eyebrow">About Kobuk Cartridges</p>
+          <h2 class="hero-headline">Where Purpose<br>Meets Performance</h2>
+          <div class="hero-body">
+            <p>Kobuk Cartridges exists because we believe in doing things the right way, with purpose, integrity, and respect for the people who depend on every round. We are here to raise the standard, not blend into it.</p>
+            <p>At Kobuk Cartridges, we push past limits because excellence matters. We solve real problems because people need solutions they can trust. And we put our customers first because reliability is our responsibility.</p>
+            <p>Kobuk Cartridges. Built with purpose. Trusted when it counts.</p>
+          </div>
+        </div>
+      </div>
+
+      <span class="caption-coords caption-coords--bottom-right">67.07333° N, 154.31167° W</span>
+
+    </div>
+  </div>
 
   <!-- ── Hero Banner ───────────────────────────────────────── -->
   <div class="component-block">
@@ -560,9 +637,9 @@
     </div>
   </div>
 
-  <!-- ── Hero Banner — Title Only ─────────────────── -->
+  <!-- ── Hero Banner — Title Hover ─────────────────── -->
   <div class="component-block">
-    <div class="component-label">Hero Banner — Title Only</div>
+    <div class="component-label">Hero Banner — Title Hover</div>
 
     <div class="hero">
 
@@ -615,6 +692,30 @@
     </div>
   </div>
 
+  <!-- ── 50/50 Feature — Coordinates Only ──────────────── -->
+  <div class="component-block">
+    <div class="component-label">50/50 Feature — Coordinates Only</div>
+
+    <div class="feature-5050">
+
+      <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
+      <div class="feature-overlay"></div>
+
+      <div class="feature-container">
+        <div class="feature-content">
+          <div class="feature-eyebrow-group">
+            <p class="feature-eyebrow">Why Choose Us</p>
+            <h2 class="feature-headline">Purpose Built. Proven Performance.</h2>
+          </div>
+          <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
+        </div>
+      </div>
+
+      <span class="caption-coords caption-coords--bottom-left">67.83° N, 153.62° W</span>
+
+    </div>
+  </div>
+
   <!-- ── 50/50 Feature ────────────────────────────────────── -->
   <div class="component-block">
     <div class="component-label">50/50 Feature</div>
@@ -652,9 +753,9 @@
     </div>
   </div>
 
-  <!-- ── 50/50 Feature — Title Only ────────────────── -->
+  <!-- ── 50/50 Feature — Title Hover ────────────────── -->
   <div class="component-block">
-    <div class="component-label">50/50 Feature — Title Only</div>
+    <div class="component-label">50/50 Feature — Title Hover</div>
 
     <div class="feature-5050">
 
@@ -680,6 +781,50 @@
         </button>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ── Left / Right-Aligned Image with Text — Coordinates Only ── -->
+  <div class="component-block">
+    <div class="component-label">Left / Right-Aligned Image with Text — Coordinates Only</div>
+
+    <div class="image-text-wrapper">
+      <div class="image-text-inner">
+
+        <!-- Image Right -->
+        <div class="image-text">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
+            <p class="image-text-lead">There is nowhere on Earth to test one's resolve like Alaska.</p>
+            <p class="image-text-body">The Last Frontier serves as the inspiration for our identity — a salute to Alaska's landscape and inhabitants — and our admiration for both.</p>
+            <p class="image-text-body">We see Alaska as the ultimate proving ground for adventure.</p>
+            <p class="image-text-body">And no matter the challenge that lies ahead, it's our job to empower our customers to Fear No Frontier.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
+              <span class="caption-coords caption-coords--img">60.44° N, 150.81° W</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Left -->
+        <div class="image-text image-text--reverse">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Built for the Field</h2>
+            <p class="image-text-lead">Every round engineered for the conditions you'll actually face.</p>
+            <p class="image-text-body">Kobuk Cartridges are tested where temperatures drop below zero, where equipment is pushed to its limits, and where failure is not an option.</p>
+            <p class="image-text-body">From the tundra to the tree line, our ammunition delivers the consistent performance that hunters and marksmen in the most demanding environments trust.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
+              <span class="caption-coords caption-coords--img">67.07333° N, 154.31167° W</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -743,9 +888,9 @@
     </div>
   </div>
 
-  <!-- ── Left / Right-Aligned Image with Text — Title Only ── -->
+  <!-- ── Left / Right-Aligned Image with Text — Title Hover ── -->
   <div class="component-block">
-    <div class="component-label">Left / Right-Aligned Image with Text — Title Only</div>
+    <div class="component-label">Left / Right-Aligned Image with Text — Title Hover</div>
 
     <div class="image-text-wrapper">
       <div class="image-text-inner">
@@ -800,6 +945,7 @@
       </div>
     </div>
   </div>
+
 
 </body>
 </html>
