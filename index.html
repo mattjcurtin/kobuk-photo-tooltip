@@ -36,18 +36,39 @@
       color: #ffffff;
     }
 
+    /* ── Section H2 headings ────────────────────────────── */
+    .section-heading {
+      background: #1e1e1e;
+      padding: 22px 40px;
+      border-top: 3px solid #e5ccad;
+    }
+    .section-heading h2 {
+      font-family: ff-good-web-pro-condensed, sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--brand-secondary);
+    }
+    .section-heading + .component-block {
+      margin-top: 0;
+    }
+
     .component-block {
       margin: 48px 0;
+    }
+    .component-block:first-of-type {
+      margin-top: 0;
     }
     .component-label {
       padding: 10px 40px;
       background: #d0d0d0;
       font-family: system-ui, sans-serif;
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: #555;
+      color: #000;
       border-top: 1px solid #bbb;
       border-bottom: 1px solid #bbb;
     }
@@ -67,7 +88,6 @@
       object-position: center 40%;
     }
 
-    /* Gradient overlays (faithful to Figma) */
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -140,7 +160,6 @@
       display: block;
     }
 
-    /* Logo */
     .nav-logo {
       flex-shrink: 0;
       padding: 0 24px;
@@ -154,7 +173,6 @@
       display: block;
     }
 
-    /* CTA button */
     .nav-cta {
       margin-left: 20px;
       flex-shrink: 0;
@@ -219,7 +237,7 @@
     }
     .hero-body p + p { margin-top: 14px; }
 
-    /* ── Camera caption tooltip ──────────────────────────── */
+    /* ── Caption tooltip ─────────────────────────────────── */
     .caption-trigger {
       position: absolute;
       bottom: 32px;
@@ -227,14 +245,12 @@
       z-index: 20;
     }
 
-    /* Popup card (hidden by default) */
     .caption-card {
       position: absolute;
       bottom: calc(100% + 10px);
       right: 0;
       width: 300px;
       background: rgba(10, 10, 10, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.25);
       padding: 18px 20px;
       opacity: 0;
       transform: translateY(6px);
@@ -247,6 +263,32 @@
       pointer-events: auto;
     }
 
+    /* Rounded box variant */
+    .caption-card--rounded {
+      border-radius: 10px;
+    }
+
+    /* Text shadow / no box variant */
+    .caption-card--no-bg {
+      background: none;
+      padding: 0 0 6px 0;
+      width: 300px;
+    }
+    .caption-card--no-bg .caption-card-title,
+    .caption-card--no-bg .caption-card-desc {
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6);
+    }
+    .caption-card--no-bg .caption-card-desc {
+      white-space: normal;
+    }
+
+    /* Title+Description no-bg: narrower, left-anchored */
+    .caption-card--no-bg-td {
+      width: 200px;
+      left: 0;
+      right: auto;
+    }
+
     .caption-card-title {
       font-family: ff-good-web-pro-condensed, sans-serif;
       font-weight: 700;
@@ -256,13 +298,109 @@
       margin-bottom: 6px;
       line-height: 1.1;
     }
+    .caption-card-title:last-child {
+      margin-bottom: 0;
+    }
     .caption-card-desc {
       font-family: din-2014, sans-serif;
       font-weight: 400;
       font-size: 15px;
       line-height: 1.55;
-      color: rgba(255,255,255,0.72);
+      color: #fff;
     }
+
+    /* ── Pill button ─────────────────────────────────────── */
+    .caption-pill {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      width: auto;
+      background: rgba(10, 10, 10, 0.6);
+      border: 1px solid rgba(255,255,255,0.65);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      appearance: none;
+    }
+    .caption-trigger:hover .caption-pill {
+      background: rgba(10, 10, 10, 0.8);
+      border-color: #D3A873;
+    }
+    .caption-trigger:hover .caption-pill-text {
+      color: #D3A873;
+    }
+    .caption-pill-text {
+      font-family: din-2014, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    /* Ghost pill (text-only, no box) */
+    .caption-pill--ghost {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .caption-pill--ghost .caption-pill-text {
+      font-weight: 400;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.85), 0 0 16px rgba(0,0,0,0.5);
+    }
+    .caption-trigger:hover .caption-pill--ghost {
+      background: none;
+      border-color: transparent;
+    }
+    .caption-trigger:hover .caption-pill--ghost .caption-pill-text {
+      color: #f0e2d0;
+    }
+
+    .caption-pill--ghost .caption-pill-text {
+      position: relative;
+    }
+    .caption-pill--ghost .caption-pill-text::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #f0e2d0;
+      transition: width 0.25s ease;
+    }
+    .caption-trigger:hover .caption-pill--ghost .caption-pill-text::after {
+      width: 100%;
+    }
+
+    /* ── Coordinates-only (no hover state) ───────────────── */
+    .caption-coords {
+      position: absolute;
+      z-index: 20;
+      font-family: din-2014, sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--white);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.85), 0 0 16px rgba(0,0,0,0.5);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .caption-coords--bottom-right {
+      bottom: 32px;
+      right: 64px;
+    }
+
+    .caption-coords--bottom-left {
+      bottom: 23px;
+      left: 23px;
+    }
+
+    .caption-coords--img {
+      bottom: 12px;
+      left: 12px;
+    }
+
     /* ── Image with Text ────────────────────────────────── */
     .image-text-wrapper {
       background: var(--navy);
@@ -347,7 +485,6 @@
       object-fit: cover;
     }
 
-    /* Tooltip positioned inside the image frame */
     .caption-trigger--img {
       position: absolute;
       bottom: 12px;
@@ -355,17 +492,17 @@
       z-index: 10;
     }
 
-    /* Smaller pill variant for image-frame tooltips */
     .caption-pill--sm {
-      width: auto;
       padding: 4px 8px;
-      gap: 8px;
     }
 
-    /* Caption card — left-anchored variant (for bottom-left triggers) */
     .caption-card--left {
       right: auto;
       left: 0;
+    }
+
+    .caption-trigger--img .caption-card--left {
+      left: 8px;
     }
 
     /* ── 50/50 Feature ──────────────────────────────────── */
@@ -391,7 +528,6 @@
       object-position: center center;
     }
 
-    /* Gradient: transparent left → navy 80% right */
     .feature-overlay {
       position: absolute;
       inset: 0;
@@ -449,70 +585,12 @@
       color: rgba(255,255,255,0.92);
     }
 
-    /* Caption trigger — bottom-left variant */
     .caption-trigger--left {
       position: absolute;
       bottom: 23px;
       left: 23px;
       right: auto;
       z-index: 20;
-    }
-
-    /* Pill button (always visible) */
-    .caption-pill {
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      width: auto;
-      background: rgba(10, 10, 10, 0.6);
-      border: 1px solid rgba(255,255,255,0.65);
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-      appearance: none;
-    }
-    .caption-trigger:hover .caption-pill {
-      background: rgba(10, 10, 10, 0.8);
-      border-color: #D3A873;
-    }
-    .caption-trigger:hover .caption-pill-text {
-      color: #D3A873;
-    }
-    .caption-pill-text {
-      font-family: din-2014, sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--white);
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-
-    /* ── Coordinates-only (no hover state) ───────────────── */
-    .caption-coords {
-      position: absolute;
-      z-index: 20;
-      font-family: din-2014, sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--white);
-      text-shadow: 0 1px 4px rgba(0,0,0,0.85), 0 0 16px rgba(0,0,0,0.5);
-      white-space: nowrap;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .caption-coords--bottom-right {
-      bottom: 32px;
-      right: 64px;
-    }
-
-    .caption-coords--bottom-left {
-      bottom: 23px;
-      left: 23px;
-    }
-
-    .caption-coords--img {
-      bottom: 12px;
-      left: 12px;
     }
   </style>
 </head>
@@ -523,12 +601,17 @@
     <h1>Kobuk Image Caption Support</h1>
   </header>
 
-  <!-- ── Hero Banner — Coordinates Only ────────────────── -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  HERO BANNER                                           -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-heading"><h2>Hero Banner</h2></div>
+
+  <!-- ── Hero Banner — Coordinates Only ────────────────────── -->
   <div class="component-block">
-    <div class="component-label">Hero Banner — Coordinates Only</div>
+    <div class="component-label">Coordinates Only</div>
 
     <div class="hero">
-
       <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
       <div class="hero-overlay"></div>
 
@@ -543,12 +626,8 @@
             <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
           </a>
           <div class="nav-side right">
-            <div class="nav-item">
-              <a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
-            </div>
-            <div class="nav-item">
-              <a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
-            </div>
+            <div class="nav-item"><a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-item"><a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
             <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
           </div>
         </div>
@@ -567,21 +646,17 @@
       </div>
 
       <span class="caption-coords caption-coords--bottom-right">67.07333° N, 154.31167° W</span>
-
     </div>
   </div>
 
-  <!-- ── Hero Banner ───────────────────────────────────────── -->
+  <!-- ── Hero Banner — Coords + popup with Title / text shadow ── -->
   <div class="component-block">
-    <div class="component-label">Hero Banner</div>
+    <div class="component-label">Coords + popup with Title — Popup with text shadow and no framed box background</div>
 
     <div class="hero">
-
-      <!-- Background image -->
       <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
       <div class="hero-overlay"></div>
 
-      <!-- Navigation -->
       <nav class="hero-nav" aria-label="Site navigation">
         <div class="hero-nav-inner">
           <div class="nav-side left">
@@ -593,18 +668,13 @@
             <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
           </a>
           <div class="nav-side right">
-            <div class="nav-item">
-              <a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
-            </div>
-            <div class="nav-item">
-              <a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
-            </div>
+            <div class="nav-item"><a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-item"><a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
             <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
           </div>
         </div>
       </nav>
 
-      <!-- Text content -->
       <div class="hero-content">
         <div class="hero-content-inner">
           <p class="hero-eyebrow">About Kobuk Cartridges</p>
@@ -617,32 +687,121 @@
         </div>
       </div>
 
-      <!-- ── Photo caption tooltip ── -->
       <div class="caption-trigger">
+        <div class="caption-card caption-card--no-bg caption-card--no-bg-td" role="tooltip">
+          <div class="caption-card-title">Kobuk River Valley</div>
+        </div>
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
+          <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
-        <!-- Popup card (visible on hover) -->
-        <div class="caption-card" role="tooltip">
+  <!-- ── Hero Banner — Coords + popup with Description / text shadow ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Description — Popup with text shadow and no framed box background</div>
+
+    <div class="hero">
+      <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
+      <div class="hero-overlay"></div>
+
+      <nav class="hero-nav" aria-label="Site navigation">
+        <div class="hero-nav-inner">
+          <div class="nav-side left">
+            <div class="nav-item active"><a href="#">About</a></div>
+            <div class="nav-item"><a href="#">Products</a></div>
+            <div class="nav-item"><a href="#">News</a></div>
+          </div>
+          <a href="#" class="nav-logo">
+            <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
+          </a>
+          <div class="nav-side right">
+            <div class="nav-item"><a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-item"><a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-content-inner">
+          <p class="hero-eyebrow">About Kobuk Cartridges</p>
+          <h2 class="hero-headline">Where Purpose<br>Meets Performance</h2>
+          <div class="hero-body">
+            <p>Kobuk Cartridges exists because we believe in doing things the right way, with purpose, integrity, and respect for the people who depend on every round. We are here to raise the standard, not blend into it.</p>
+            <p>At Kobuk Cartridges, we push past limits because excellence matters. We solve real problems because people need solutions they can trust. And we put our customers first because reliability is our responsibility.</p>
+            <p>Kobuk Cartridges. Built with purpose. Trusted when it counts.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-trigger">
+        <div class="caption-card caption-card--no-bg caption-card--no-bg-td" role="tooltip">
+          <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+        </div>
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
+          <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Hero Banner — Coords + popup with Title+Description / text shadow ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Title+Description — Popup with text shadow and no framed box background</div>
+
+    <div class="hero">
+      <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
+      <div class="hero-overlay"></div>
+
+      <nav class="hero-nav" aria-label="Site navigation">
+        <div class="hero-nav-inner">
+          <div class="nav-side left">
+            <div class="nav-item active"><a href="#">About</a></div>
+            <div class="nav-item"><a href="#">Products</a></div>
+            <div class="nav-item"><a href="#">News</a></div>
+          </div>
+          <a href="#" class="nav-logo">
+            <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
+          </a>
+          <div class="nav-side right">
+            <div class="nav-item"><a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-item"><a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-content-inner">
+          <p class="hero-eyebrow">About Kobuk Cartridges</p>
+          <h2 class="hero-headline">Where Purpose<br>Meets Performance</h2>
+          <div class="hero-body">
+            <p>Kobuk Cartridges exists because we believe in doing things the right way, with purpose, integrity, and respect for the people who depend on every round. We are here to raise the standard, not blend into it.</p>
+            <p>At Kobuk Cartridges, we push past limits because excellence matters. We solve real problems because people need solutions they can trust. And we put our customers first because reliability is our responsibility.</p>
+            <p>Kobuk Cartridges. Built with purpose. Trusted when it counts.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-trigger">
+        <div class="caption-card caption-card--no-bg caption-card--no-bg-td" role="tooltip">
           <div class="caption-card-title">Kobuk River Valley</div>
           <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
         </div>
-
-        <!-- Always-visible pill button -->
-        <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
           <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
         </button>
-
       </div>
-      <!-- ── /Photo caption tooltip ── -->
-
     </div>
   </div>
 
-  <!-- ── Hero Banner — Title Hover ─────────────────── -->
+  <!-- ── Hero Banner — Coords + popup with Title / rounded box ── -->
   <div class="component-block">
-    <div class="component-label">Hero Banner — Title Hover</div>
+    <div class="component-label">Coords + popup with Title — Popup with transparent black box with rounded corners</div>
 
     <div class="hero">
-
       <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
       <div class="hero-overlay"></div>
 
@@ -657,12 +816,8 @@
             <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
           </a>
           <div class="nav-side right">
-            <div class="nav-item">
-              <a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
-            </div>
-            <div class="nav-item">
-              <a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a>
-            </div>
+            <div class="nav-item"><a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-item"><a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
             <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
           </div>
         </div>
@@ -681,26 +836,128 @@
       </div>
 
       <div class="caption-trigger">
-        <div class="caption-card" role="tooltip">
+        <div class="caption-card caption-card--rounded" role="tooltip">
           <div class="caption-card-title">Kobuk River Valley</div>
         </div>
-        <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
           <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
         </button>
       </div>
-
     </div>
   </div>
 
-  <!-- ── 50/50 Feature — Coordinates Only ──────────────── -->
+  <!-- ── Hero Banner — Coords + popup with Description / rounded box ── -->
   <div class="component-block">
-    <div class="component-label">50/50 Feature — Coordinates Only</div>
+    <div class="component-label">Coords + popup with Description — Popup with transparent black box with rounded corners</div>
+
+    <div class="hero">
+      <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
+      <div class="hero-overlay"></div>
+
+      <nav class="hero-nav" aria-label="Site navigation">
+        <div class="hero-nav-inner">
+          <div class="nav-side left">
+            <div class="nav-item active"><a href="#">About</a></div>
+            <div class="nav-item"><a href="#">Products</a></div>
+            <div class="nav-item"><a href="#">News</a></div>
+          </div>
+          <a href="#" class="nav-logo">
+            <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
+          </a>
+          <div class="nav-side right">
+            <div class="nav-item"><a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-item"><a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-content-inner">
+          <p class="hero-eyebrow">About Kobuk Cartridges</p>
+          <h2 class="hero-headline">Where Purpose<br>Meets Performance</h2>
+          <div class="hero-body">
+            <p>Kobuk Cartridges exists because we believe in doing things the right way, with purpose, integrity, and respect for the people who depend on every round. We are here to raise the standard, not blend into it.</p>
+            <p>At Kobuk Cartridges, we push past limits because excellence matters. We solve real problems because people need solutions they can trust. And we put our customers first because reliability is our responsibility.</p>
+            <p>Kobuk Cartridges. Built with purpose. Trusted when it counts.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-trigger">
+        <div class="caption-card caption-card--rounded" role="tooltip">
+          <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+        </div>
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
+          <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Hero Banner — Coords + popup with Title+Description / rounded box ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Title+Description — Popup with transparent black box with rounded corners</div>
+
+    <div class="hero">
+      <img class="hero-bg" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley, Alaska">
+      <div class="hero-overlay"></div>
+
+      <nav class="hero-nav" aria-label="Site navigation">
+        <div class="hero-nav-inner">
+          <div class="nav-side left">
+            <div class="nav-item active"><a href="#">About</a></div>
+            <div class="nav-item"><a href="#">Products</a></div>
+            <div class="nav-item"><a href="#">News</a></div>
+          </div>
+          <a href="#" class="nav-logo">
+            <img src="assets/kobuk-cartridges-logo.svg" alt="Kobuk Cartridges" class="nav-logo-img">
+          </a>
+          <div class="nav-side right">
+            <div class="nav-item"><a href="#">Dealers <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-item"><a href="#">Support <img src="assets/menu-dropdown.svg" alt="" class="nav-dropdown-arrow"></a></div>
+            <div class="nav-cta"><a href="#">Where in Kobuk?</a></div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-content-inner">
+          <p class="hero-eyebrow">About Kobuk Cartridges</p>
+          <h2 class="hero-headline">Where Purpose<br>Meets Performance</h2>
+          <div class="hero-body">
+            <p>Kobuk Cartridges exists because we believe in doing things the right way, with purpose, integrity, and respect for the people who depend on every round. We are here to raise the standard, not blend into it.</p>
+            <p>At Kobuk Cartridges, we push past limits because excellence matters. We solve real problems because people need solutions they can trust. And we put our customers first because reliability is our responsibility.</p>
+            <p>Kobuk Cartridges. Built with purpose. Trusted when it counts.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-trigger">
+        <div class="caption-card caption-card--rounded" role="tooltip">
+          <div class="caption-card-title">Kobuk River Valley</div>
+          <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+        </div>
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
+          <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  50/50 FEATURE                                         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-heading"><h2>50/50 Feature</h2></div>
+
+  <!-- ── 50/50 Feature — Coordinates Only ──────────────────── -->
+  <div class="component-block">
+    <div class="component-label">Coordinates Only</div>
 
     <div class="feature-5050">
-
       <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
       <div class="feature-overlay"></div>
-
       <div class="feature-container">
         <div class="feature-content">
           <div class="feature-eyebrow-group">
@@ -710,21 +967,17 @@
           <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
         </div>
       </div>
-
       <span class="caption-coords caption-coords--bottom-left">67.83° N, 153.62° W</span>
-
     </div>
   </div>
 
-  <!-- ── 50/50 Feature ────────────────────────────────────── -->
+  <!-- ── 50/50 Feature — Coords + popup with Title / text shadow ── -->
   <div class="component-block">
-    <div class="component-label">50/50 Feature</div>
+    <div class="component-label">Coords + popup with Title — Popup with text shadow and no framed box background</div>
 
     <div class="feature-5050">
-
       <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
       <div class="feature-overlay"></div>
-
       <div class="feature-container">
         <div class="feature-content">
           <div class="feature-eyebrow-group">
@@ -734,34 +987,79 @@
           <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
         </div>
       </div>
-
-      <!-- ── Photo caption tooltip (bottom-left) ── -->
       <div class="caption-trigger caption-trigger--left">
+        <div class="caption-card caption-card--no-bg caption-card--left" role="tooltip">
+          <div class="caption-card-title">Brooks Range, Alaska</div>
+        </div>
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
+          <span class="caption-pill-text">67.83° N, 153.62° W</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
-        <div class="caption-card caption-card--left" role="tooltip">
+  <!-- ── 50/50 Feature — Coords + popup with Description / text shadow ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Description — Popup with text shadow and no framed box background</div>
+
+    <div class="feature-5050">
+      <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
+      <div class="feature-overlay"></div>
+      <div class="feature-container">
+        <div class="feature-content">
+          <div class="feature-eyebrow-group">
+            <p class="feature-eyebrow">Why Choose Us</p>
+            <h2 class="feature-headline">Purpose Built. Proven Performance.</h2>
+          </div>
+          <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
+        </div>
+      </div>
+      <div class="caption-trigger caption-trigger--left">
+        <div class="caption-card caption-card--no-bg caption-card--left" role="tooltip">
+          <p class="caption-card-desc">A river valley cuts through the Brooks Range in the Gates of the Arctic National Park, one of the most remote wilderness areas in North America.</p>
+        </div>
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
+          <span class="caption-pill-text">67.83° N, 153.62° W</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 50/50 Feature — Coords + popup with Title+Description / text shadow ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Title+Description — Popup with text shadow and no framed box background</div>
+
+    <div class="feature-5050">
+      <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
+      <div class="feature-overlay"></div>
+      <div class="feature-container">
+        <div class="feature-content">
+          <div class="feature-eyebrow-group">
+            <p class="feature-eyebrow">Why Choose Us</p>
+            <h2 class="feature-headline">Purpose Built. Proven Performance.</h2>
+          </div>
+          <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
+        </div>
+      </div>
+      <div class="caption-trigger caption-trigger--left">
+        <div class="caption-card caption-card--no-bg caption-card--left caption-card--no-bg-td" role="tooltip">
           <div class="caption-card-title">Brooks Range, Alaska</div>
           <p class="caption-card-desc">A river valley cuts through the Brooks Range in the Gates of the Arctic National Park, one of the most remote wilderness areas in North America.</p>
         </div>
-
-        <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
           <span class="caption-pill-text">67.83° N, 153.62° W</span>
         </button>
-
       </div>
-      <!-- ── /Photo caption tooltip ── -->
-
     </div>
   </div>
 
-  <!-- ── 50/50 Feature — Title Hover ────────────────── -->
+  <!-- ── 50/50 Feature — Coords + popup with Title / rounded box ── -->
   <div class="component-block">
-    <div class="component-label">50/50 Feature — Title Hover</div>
+    <div class="component-label">Coords + popup with Title — Popup with transparent black box with rounded corners</div>
 
     <div class="feature-5050">
-
       <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
       <div class="feature-overlay"></div>
-
       <div class="feature-container">
         <div class="feature-content">
           <div class="feature-eyebrow-group">
@@ -771,27 +1069,85 @@
           <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
         </div>
       </div>
-
       <div class="caption-trigger caption-trigger--left">
-        <div class="caption-card caption-card--left" role="tooltip">
+        <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
           <div class="caption-card-title">Brooks Range, Alaska</div>
         </div>
-        <button class="caption-pill" aria-label="View photo caption" aria-haspopup="true">
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
           <span class="caption-pill-text">67.83° N, 153.62° W</span>
         </button>
       </div>
-
     </div>
   </div>
 
-  <!-- ── Left / Right-Aligned Image with Text — Coordinates Only ── -->
+  <!-- ── 50/50 Feature — Coords + popup with Description / rounded box ── -->
   <div class="component-block">
-    <div class="component-label">Left / Right-Aligned Image with Text — Coordinates Only</div>
+    <div class="component-label">Coords + popup with Description — Popup with transparent black box with rounded corners</div>
+
+    <div class="feature-5050">
+      <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
+      <div class="feature-overlay"></div>
+      <div class="feature-container">
+        <div class="feature-content">
+          <div class="feature-eyebrow-group">
+            <p class="feature-eyebrow">Why Choose Us</p>
+            <h2 class="feature-headline">Purpose Built. Proven Performance.</h2>
+          </div>
+          <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
+        </div>
+      </div>
+      <div class="caption-trigger caption-trigger--left">
+        <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
+          <p class="caption-card-desc">A river valley cuts through the Brooks Range in the Gates of the Arctic National Park, one of the most remote wilderness areas in North America.</p>
+        </div>
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
+          <span class="caption-pill-text">67.83° N, 153.62° W</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 50/50 Feature — Coords + popup with Title+Description / rounded box ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Title+Description — Popup with transparent black box with rounded corners</div>
+
+    <div class="feature-5050">
+      <img class="feature-bg" src="assets/08550004.jpg.webp" alt="Kobuk landscape, Alaska">
+      <div class="feature-overlay"></div>
+      <div class="feature-container">
+        <div class="feature-content">
+          <div class="feature-eyebrow-group">
+            <p class="feature-eyebrow">Why Choose Us</p>
+            <h2 class="feature-headline">Purpose Built. Proven Performance.</h2>
+          </div>
+          <p class="feature-body">Every Kobuk Cartridges round is designed to perform when it matters most. We blend Alaska's legacy of resilience with dependable military precision, because trust comes from performance you can count on.</p>
+        </div>
+      </div>
+      <div class="caption-trigger caption-trigger--left">
+        <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
+          <div class="caption-card-title">Brooks Range, Alaska</div>
+          <p class="caption-card-desc">A river valley cuts through the Brooks Range in the Gates of the Arctic National Park, one of the most remote wilderness areas in North America.</p>
+        </div>
+        <button class="caption-pill caption-pill--ghost" aria-label="View photo caption" aria-haspopup="true">
+          <span class="caption-pill-text">67.83° N, 153.62° W</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  IMAGE WITH TEXT                                       -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-heading"><h2>Image with Text</h2></div>
+
+  <!-- ── Image with Text — Coordinates Only ────────────────── -->
+  <div class="component-block">
+    <div class="component-label">Coordinates Only</div>
 
     <div class="image-text-wrapper">
       <div class="image-text-inner">
 
-        <!-- Image Right -->
         <div class="image-text">
           <div class="image-text-content">
             <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
@@ -808,7 +1164,6 @@
           </div>
         </div>
 
-        <!-- Image Left -->
         <div class="image-text image-text--reverse">
           <div class="image-text-content">
             <h2 class="image-text-headline">Built for the Field</h2>
@@ -828,14 +1183,13 @@
     </div>
   </div>
 
-  <!-- ── Left / Right-Aligned Image with Text ─────────────── -->
+  <!-- ── Image with Text — Coords + popup with Title / text shadow ── -->
   <div class="component-block">
-    <div class="component-label">Left / Right-Aligned Image with Text</div>
+    <div class="component-label">Coords + popup with Title — Popup with text shadow and no framed box background</div>
 
     <div class="image-text-wrapper">
       <div class="image-text-inner">
 
-        <!-- Image Right -->
         <div class="image-text">
           <div class="image-text-content">
             <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
@@ -848,11 +1202,10 @@
             <div class="image-text-frame">
               <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
               <div class="caption-trigger caption-trigger--img">
-                <div class="caption-card caption-card--left" role="tooltip">
+                <div class="caption-card caption-card--no-bg caption-card--left" role="tooltip">
                   <div class="caption-card-title">Kenai Peninsula, Alaska</div>
-                  <p class="caption-card-desc">Two hunters navigate the spruce forests of the Kenai Peninsula, one of Alaska's premier backcountry destinations.</p>
                 </div>
-                <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
                   <span class="caption-pill-text">60.44° N, 150.81° W</span>
                 </button>
               </div>
@@ -860,7 +1213,6 @@
           </div>
         </div>
 
-        <!-- Image Left -->
         <div class="image-text image-text--reverse">
           <div class="image-text-content">
             <h2 class="image-text-headline">Built for the Field</h2>
@@ -872,11 +1224,10 @@
             <div class="image-text-frame">
               <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
               <div class="caption-trigger caption-trigger--img">
-                <div class="caption-card caption-card--left" role="tooltip">
+                <div class="caption-card caption-card--no-bg caption-card--left" role="tooltip">
                   <div class="caption-card-title">Kobuk River Valley</div>
-                  <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
                 </div>
-                <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
                   <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
                 </button>
               </div>
@@ -888,14 +1239,13 @@
     </div>
   </div>
 
-  <!-- ── Left / Right-Aligned Image with Text — Title Hover ── -->
+  <!-- ── Image with Text — Coords + popup with Description / text shadow ── -->
   <div class="component-block">
-    <div class="component-label">Left / Right-Aligned Image with Text — Title Hover</div>
+    <div class="component-label">Coords + popup with Description — Popup with text shadow and no framed box background</div>
 
     <div class="image-text-wrapper">
       <div class="image-text-inner">
 
-        <!-- Image Right -->
         <div class="image-text">
           <div class="image-text-content">
             <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
@@ -908,10 +1258,10 @@
             <div class="image-text-frame">
               <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
               <div class="caption-trigger caption-trigger--img">
-                <div class="caption-card caption-card--left" role="tooltip">
-                  <div class="caption-card-title">Kenai Peninsula, Alaska</div>
+                <div class="caption-card caption-card--no-bg caption-card--left" role="tooltip">
+                  <p class="caption-card-desc">Two hunters navigate the spruce forests of the Kenai Peninsula, one of Alaska's premier backcountry destinations.</p>
                 </div>
-                <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
                   <span class="caption-pill-text">60.44° N, 150.81° W</span>
                 </button>
               </div>
@@ -919,7 +1269,6 @@
           </div>
         </div>
 
-        <!-- Image Left -->
         <div class="image-text image-text--reverse">
           <div class="image-text-content">
             <h2 class="image-text-headline">Built for the Field</h2>
@@ -931,10 +1280,238 @@
             <div class="image-text-frame">
               <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
               <div class="caption-trigger caption-trigger--img">
-                <div class="caption-card caption-card--left" role="tooltip">
+                <div class="caption-card caption-card--no-bg caption-card--left" role="tooltip">
+                  <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+                </div>
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Image with Text — Coords + popup with Title+Description / text shadow ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Title+Description — Popup with text shadow and no framed box background</div>
+
+    <div class="image-text-wrapper">
+      <div class="image-text-inner">
+
+        <div class="image-text">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
+            <p class="image-text-lead">There is nowhere on Earth to test one's resolve like Alaska.</p>
+            <p class="image-text-body">The Last Frontier serves as the inspiration for our identity — a salute to Alaska's landscape and inhabitants — and our admiration for both.</p>
+            <p class="image-text-body">We see Alaska as the ultimate proving ground for adventure.</p>
+            <p class="image-text-body">And no matter the challenge that lies ahead, it's our job to empower our customers to Fear No Frontier.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--no-bg caption-card--left caption-card--no-bg-td" role="tooltip">
+                  <div class="caption-card-title">Kenai Peninsula, Alaska</div>
+                  <p class="caption-card-desc">Two hunters navigate the spruce forests of the Kenai Peninsula, one of Alaska's premier backcountry destinations.</p>
+                </div>
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <span class="caption-pill-text">60.44° N, 150.81° W</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-text image-text--reverse">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Built for the Field</h2>
+            <p class="image-text-lead">Every round engineered for the conditions you'll actually face.</p>
+            <p class="image-text-body">Kobuk Cartridges are tested where temperatures drop below zero, where equipment is pushed to its limits, and where failure is not an option.</p>
+            <p class="image-text-body">From the tundra to the tree line, our ammunition delivers the consistent performance that hunters and marksmen in the most demanding environments trust.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--no-bg caption-card--left caption-card--no-bg-td" role="tooltip">
+                  <div class="caption-card-title">Kobuk River Valley</div>
+                  <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+                </div>
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Image with Text — Coords + popup with Title / rounded box ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Title — Popup with transparent black box with rounded corners</div>
+
+    <div class="image-text-wrapper">
+      <div class="image-text-inner">
+
+        <div class="image-text">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
+            <p class="image-text-lead">There is nowhere on Earth to test one's resolve like Alaska.</p>
+            <p class="image-text-body">The Last Frontier serves as the inspiration for our identity — a salute to Alaska's landscape and inhabitants — and our admiration for both.</p>
+            <p class="image-text-body">We see Alaska as the ultimate proving ground for adventure.</p>
+            <p class="image-text-body">And no matter the challenge that lies ahead, it's our job to empower our customers to Fear No Frontier.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
+                  <div class="caption-card-title">Kenai Peninsula, Alaska</div>
+                </div>
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <span class="caption-pill-text">60.44° N, 150.81° W</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-text image-text--reverse">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Built for the Field</h2>
+            <p class="image-text-lead">Every round engineered for the conditions you'll actually face.</p>
+            <p class="image-text-body">Kobuk Cartridges are tested where temperatures drop below zero, where equipment is pushed to its limits, and where failure is not an option.</p>
+            <p class="image-text-body">From the tundra to the tree line, our ammunition delivers the consistent performance that hunters and marksmen in the most demanding environments trust.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
                   <div class="caption-card-title">Kobuk River Valley</div>
                 </div>
-                <button class="caption-pill caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Image with Text — Coords + popup with Description / rounded box ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Description — Popup with transparent black box with rounded corners</div>
+
+    <div class="image-text-wrapper">
+      <div class="image-text-inner">
+
+        <div class="image-text">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
+            <p class="image-text-lead">There is nowhere on Earth to test one's resolve like Alaska.</p>
+            <p class="image-text-body">The Last Frontier serves as the inspiration for our identity — a salute to Alaska's landscape and inhabitants — and our admiration for both.</p>
+            <p class="image-text-body">We see Alaska as the ultimate proving ground for adventure.</p>
+            <p class="image-text-body">And no matter the challenge that lies ahead, it's our job to empower our customers to Fear No Frontier.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
+                  <p class="caption-card-desc">Two hunters navigate the spruce forests of the Kenai Peninsula, one of Alaska's premier backcountry destinations.</p>
+                </div>
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <span class="caption-pill-text">60.44° N, 150.81° W</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-text image-text--reverse">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Built for the Field</h2>
+            <p class="image-text-lead">Every round engineered for the conditions you'll actually face.</p>
+            <p class="image-text-body">Kobuk Cartridges are tested where temperatures drop below zero, where equipment is pushed to its limits, and where failure is not an option.</p>
+            <p class="image-text-body">From the tundra to the tree line, our ammunition delivers the consistent performance that hunters and marksmen in the most demanding environments trust.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
+                  <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+                </div>
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Image with Text — Coords + popup with Title+Description / rounded box ── -->
+  <div class="component-block">
+    <div class="component-label">Coords + popup with Title+Description — Popup with transparent black box with rounded corners</div>
+
+    <div class="image-text-wrapper">
+      <div class="image-text-inner">
+
+        <div class="image-text">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Alaska: The Last Frontier</h2>
+            <p class="image-text-lead">There is nowhere on Earth to test one's resolve like Alaska.</p>
+            <p class="image-text-body">The Last Frontier serves as the inspiration for our identity — a salute to Alaska's landscape and inhabitants — and our admiration for both.</p>
+            <p class="image-text-body">We see Alaska as the ultimate proving ground for adventure.</p>
+            <p class="image-text-body">And no matter the challenge that lies ahead, it's our job to empower our customers to Fear No Frontier.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/KOBUK_hike_4_color_adjusted.jpg" alt="Two hikers in the Alaskan wilderness">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
+                  <div class="caption-card-title">Kenai Peninsula, Alaska</div>
+                  <p class="caption-card-desc">Two hunters navigate the spruce forests of the Kenai Peninsula, one of Alaska's premier backcountry destinations.</p>
+                </div>
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
+                  <span class="caption-pill-text">60.44° N, 150.81° W</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-text image-text--reverse">
+          <div class="image-text-content">
+            <h2 class="image-text-headline">Built for the Field</h2>
+            <p class="image-text-lead">Every round engineered for the conditions you'll actually face.</p>
+            <p class="image-text-body">Kobuk Cartridges are tested where temperatures drop below zero, where equipment is pushed to its limits, and where failure is not an option.</p>
+            <p class="image-text-body">From the tundra to the tree line, our ammunition delivers the consistent performance that hunters and marksmen in the most demanding environments trust.</p>
+          </div>
+          <div class="image-text-media">
+            <div class="image-text-frame">
+              <img class="frame-photo" src="assets/kobuk-hero.jpg" alt="Aerial view of the Kobuk River Valley">
+              <div class="caption-trigger caption-trigger--img">
+                <div class="caption-card caption-card--rounded caption-card--left" role="tooltip">
+                  <div class="caption-card-title">Kobuk River Valley</div>
+                  <p class="caption-card-desc">Aerial view of the Kobuk River winding through the Gates of the Arctic region, Brooks Range, Alaska.</p>
+                </div>
+                <button class="caption-pill caption-pill--ghost caption-pill--sm" aria-label="View photo caption" aria-haspopup="true">
                   <span class="caption-pill-text">67.07333° N, 154.31167° W</span>
                 </button>
               </div>
